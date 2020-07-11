@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/common/api.service';
 import { MessageService } from 'src/app/common/message.service';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-creat-post-modal',
@@ -70,6 +71,7 @@ export class CreatPostModalComponent implements OnInit {
           console.log('update res',res)
           this.message.successMsg('Post Detail Updated Successfully')
           this.activeModal.close()
+          window.location.reload()
         }
       },
       err=>{
@@ -85,6 +87,7 @@ export class CreatPostModalComponent implements OnInit {
           this.message.successMsg('Post Created Successfully')
           this.postForm.reset()
           this.activeModal.close()
+          window.location.reload()
         }
       },
       err=>{
