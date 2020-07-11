@@ -9,6 +9,8 @@ import { CreatPostModalComponent } from 'src/app/modals/creat-post-modal/creat-p
 })
 export class HeaderComponent implements OnInit {
 
+  isOpen: boolean = false
+
   constructor(
     private modalService: NgbModal
   ) { }

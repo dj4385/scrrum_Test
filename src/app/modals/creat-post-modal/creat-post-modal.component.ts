@@ -12,7 +12,7 @@ import { EventEmitter } from 'protractor';
 })
 export class CreatPostModalComponent implements OnInit {
   @Input() post
-  @Input() public postObject
+  @Input() public postObject:any = {}
   isPostObject: boolean = false
   postForm: FormGroup
 
