@@ -14,7 +14,7 @@ export class ApiService{
     ){}
 
     getPostList = () => this.httpClient.get<post[]>(`${environment.apiUrl}posts`)
-    createPost = (postData) => this.httpClient.get(`${environment.apiUrl}posts`,postData)
+    createPost = (postData) => this.httpClient.post(`${environment.apiUrl}posts`,postData)
     getPostDetail = (id:Number) => this.httpClient.get<post>(`${environment.apiUrl}posts/${id}`)
     deletePost = (id:Number) => this.httpClient.delete(`${environment.apiUrl}posts/${id}`)
     updatePost = (id:Number, postData) => this.httpClient.put(`${environment.apiUrl}posts/${id}`,postData)

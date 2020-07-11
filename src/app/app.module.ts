@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

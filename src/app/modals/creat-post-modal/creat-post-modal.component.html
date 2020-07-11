@@ -1,1 +1,31 @@
-<p>creat-post-modal works!</p>
+<div class="modal-header">
+    <h4 class="modal-title">{{post}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+        <div class="form-group">
+            <label for="">User Id</label>
+            <input type="number" class="form-control" placeholder="User Id" formControlName="userId" min="1" required>
+            <p class="text-danger" *ngIf="control.userId.invalid && (control.userId.touched || control.userId.dirty)">User Id is required</p>
+        </div>
+        <div class="form-group">
+            <label for="">Title</label>
+            <input type="text" class="form-control" placeholder="Title of the post" formControlName="title" required>
+            <p class="text-danger" *ngIf="control.title.invalid && (control.title.touched || control.title.dirty)">Post title is required</p>
+        </div>
+        <div class="form-group">
+            <label for="">Description</label>
+            <textarea class="form-control" cols="30" rows="5" style="resize: none;" formControlName="body" required></textarea>
+            <p class="text-danger" *ngIf="control.body.invalid && (control.body.touched || control.body.dirty)">Post Description is required</p>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="postForm.invalid">Create</button>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>

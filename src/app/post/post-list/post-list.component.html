@@ -18,7 +18,7 @@
                     <button class="btn btn-sm mr-2 btn-primary" [routerLink]="['/post-detail', post?.id]" routerLinkActive="router-link-active" >
                         <span class="fa fa-eye"></span> View Post
                     </button>
-                    <button class="btn btn-sm btn-danger">
+                    <button class="btn btn-sm btn-danger" (click)="open(deleteModal, post?.id)">
                         <span class="fa fa-trash"></span> Delete
                     </button>
                 </div>
@@ -26,3 +26,24 @@
         </div>
     </div>
 </div>
+
+<!-- delete modal -->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Do you want to delete post {{postId}}?</p>
+      <div>
+          <button class="btn btn-primary mr-2" (click)="delete(postId)">Confirm</button>
+          <button class="btn btn-danger" (click)="modal.dismiss('close')">Cancel</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('close')">Close</button>
+    </div>
+  </ng-template>
+  
