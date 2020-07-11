@@ -5,6 +5,8 @@ import { post } from '../post';
 import { comment } from '../comment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'src/app/common/message.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreatPostModalComponent } from 'src/app/modals/creat-post-modal/creat-post-modal.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -20,7 +22,8 @@ export class PostDetailComponent implements OnInit {
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private message: MessageService
+    private message: MessageService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -68,4 +71,8 @@ export class PostDetailComponent implements OnInit {
     )
   }
 
+  open(){
+    const modalRef = this.modalService.open(CreatPostModalComponent)
+    modalRef.componentInstance.postObject = this.postRes
+  }
 }

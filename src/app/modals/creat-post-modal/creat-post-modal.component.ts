@@ -11,6 +11,8 @@ import { MessageService } from 'src/app/common/message.service';
 })
 export class CreatPostModalComponent implements OnInit {
   @Input() post
+  @Input() public postObject
+  isPostObject: boolean = false
   postForm: FormGroup
 
   constructor(
@@ -22,6 +24,10 @@ export class CreatPostModalComponent implements OnInit {
 
   ngOnInit() {
     this.createForm()
+    if(Object.keys(this.postObject).length){
+      this.isPostObject = true
+      this.patchValue(this.postObject)
+    }
   }
 
   createForm(){
@@ -29,6 +35,14 @@ export class CreatPostModalComponent implements OnInit {
       userId: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
       body: new FormControl('', [Validators.required])
+    })
+  }
+
+  patchValue(value){
+    this.postForm.patchValue({
+      userId: value.userId,
+      title: value.title,
+      body: value.body
     })
   }
 
@@ -41,20 +55,41 @@ export class CreatPostModalComponent implements OnInit {
       this.message.errorMsg('Invalid Form')
       return
     } else {
-      debugger
-      this.apiService.createPost(form.value).subscribe(
-        res=>{
-          debugger
-          if(res){
-            this.message.successMsg('Post Created Successfully')
-            this.postForm.reset()
-            this.activeModal.close()
-          }
-        },
-        err=>{
-          this.message.errorMsg(err.message)
-        }
-      )
+      if(this.isPostObject){
+        this.updatePostData(form)
+      } else{
+        this.createPost(form)
+      }
     }
+  }
+
+  updatePostData(form){
+    this.apiService.updatePost(this.postObject.id, form.value).subscribe(
+      res=>{
+        if(res){
+          console.log('update res',res)
+          this.message.successMsg('Post Detail Updated Successfully')
+          this.activeModal.close()
+        }
+      },
+      err=>{
+        this.message.errorMsg(err.message)
+      }
+    )
+  }
+
+  createPost(form){
+    this.apiService.createPost(form.value).subscribe(
+      res=>{
+        if(res){
+          this.message.successMsg('Post Created Successfully')
+          this.postForm.reset()
+          this.activeModal.close()
+        }
+      },
+      err=>{
+        this.message.errorMsg(err.message)
+      }
+    )
   }
 }

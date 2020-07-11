@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{post}}</h4>
+    <h4 class="modal-title">{{isPostObject? 'Update Post' : post}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -22,7 +22,7 @@
             <p class="text-danger" *ngIf="control.body.invalid && (control.body.touched || control.body.dirty)">Post Description is required</p>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" [disabled]="postForm.invalid">Create</button>
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="postForm.invalid">{{isPostObject?'Update':'Create'}}</button>
         </div>
     </form>
   </div>
