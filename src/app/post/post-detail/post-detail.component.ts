@@ -49,7 +49,6 @@ export class PostDetailComponent implements OnInit {
       res=>{
         if(res){
           this.postRes = res
-          console.log(this.postRes)
         }
       },
       err=>{

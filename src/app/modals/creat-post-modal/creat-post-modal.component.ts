@@ -68,7 +68,6 @@ export class CreatPostModalComponent implements OnInit {
     this.apiService.updatePost(this.postObject.id, form.value).subscribe(
       res=>{
         if(res){
-          console.log('update res',res)
           this.message.successMsg('Post Detail Updated Successfully')
           this.activeModal.close()
           window.location.reload()

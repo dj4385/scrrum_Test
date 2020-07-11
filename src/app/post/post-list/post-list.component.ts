@@ -50,7 +50,7 @@ export class PostListComponent implements OnInit {
     const modalRef = this.modalService.open(content,)
 
     modalRef.result.then((result) => {
-      console.log('res',result)
+      // console.log('res',result)
     },(reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -72,7 +72,6 @@ export class PostListComponent implements OnInit {
       this.apiService.deletePost(postId).subscribe(
         res=>{
           if(res){
-            console.log(res)
             this.message.successMsg('Post Deleted Successfully')
             this.postsList()
             this.modalService.dismissAll()
